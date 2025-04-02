@@ -1,0 +1,20 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}{{ faculty.name }}{% endblock %}
+
+{% block content %}
+    <h1>{{ faculty.name }}</h1>
+    <p>Руководитель: {{ faculty.faculty_head }}</p>
+
+    <h2>Кафедры:</h2>
+    <ul>
+        {% for department in departments %}
+            <li>{{ department.name }}</li>
+        {% empty %}
+            <li>Кафедры не найдены.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'faculty_edit' faculty.id %}">Редактировать факультет</a><br>
+    <a href="{% url 'faculty_list' %}">Вернуться к списку факультетов</a>
+{% endblock %}

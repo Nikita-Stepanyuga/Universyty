@@ -1,0 +1,36 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}{{ group.name }}{% endblock %}
+
+{% block content %}
+    <div class="page-container">
+        <h1>{{ group.name }}</h1>
+        <p><strong>Руководитель:</strong> {{ group.curator }}</p>
+
+        <h2>Студенты</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ФИО</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.person }}</td>
+                        <td>{{ student.status }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Студенты не найдены</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'group_edit' group.id %}">Редактировать группу</a><br>
+        <a href="{% url 'group_list' %}">Вернуться к списку групп</a>
+    </div>
+{% endblock %}

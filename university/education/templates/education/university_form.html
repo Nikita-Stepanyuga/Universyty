@@ -1,0 +1,13 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %} Добавление университета {% endblock %}
+
+{%block header%} Добавление университета {% endblock %}
+
+{% block content %}
+    <form method="POST" >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %}

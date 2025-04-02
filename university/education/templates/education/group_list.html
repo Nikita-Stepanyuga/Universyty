@@ -1,0 +1,36 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}Список групп{% endblock %}
+
+{% block content %}
+    <h1>Список групп</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Группа</th>
+                <th>Факультет</th>
+                <th>Куратор</th>
+                <th>Подробнее</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for group in groups %}
+            <tr>
+                <td>{{ group.name }}</td>
+                <td>{{ group.faculty }}</td>
+                <td>{{ group.curator }}</td>
+                <td>
+                    <a href="{% url 'group_detail' group.id %}" style="text-decoration: none; color: blue;">
+                        🔍 Открыть
+                    </a>
+
+                </td>
+            </tr>
+            {% empty %}
+                <tr>
+                <   td colspan="4">Группы не найдены</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

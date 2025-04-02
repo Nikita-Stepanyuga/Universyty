@@ -1,0 +1,19 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}{{ department.name }}{% endblock %}
+
+{% block content %}
+    <h1>Кафедра:</h1><h2> {{ department.name }}</h2>
+    <p>Руководитель: {{ department.head_teacher }}</p>
+
+    <h2>Преподавательский состав:</h2>
+    <ul>
+        {% for teacher in teachers %}
+            <li>{{ teacher }}</li>
+        {% empty %}
+            <li>Преподаватели не найдены.</li>
+        {% endfor %}
+    </ul>
+<a href="{% url 'department_edit' department.id %}">Редактировать кафедру</a><br>
+<a href="{% url 'department_list' %}">Вернуться к списку кафедр</a>
+{% endblock %}

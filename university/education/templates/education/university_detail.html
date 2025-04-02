@@ -1,0 +1,10 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %} {{ university.name }} {% endblock %}
+
+{% block content %}
+    <div class="center-text">
+        <h1>{{ university.name }}</h1>
+        <p>Описание: {{ university.description }}</p>
+    </div>
+{% endblock %}

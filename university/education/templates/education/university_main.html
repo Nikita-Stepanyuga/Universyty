@@ -1,0 +1,28 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Добро пожаловать!</h1>
+    <h5 class="text-center mb-5">Выберите нужный раздел:</h5>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'faculty_list' %}" class="btn w-100 p-4 text-center fs-3 btn-custom-color">Факультеты</a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'department_list' %}" class="btn w-100 p-4 text-center fs-3 btn-custom-color">Кафедры</a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'student_list' %}" class="btn w-100 p-4 text-center fs-3 btn-custom-color">Студенты</a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'teacher_list' %}" class="btn w-100 p-4 text-center fs-3 btn-custom-color">Преподаватели</a>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'group_list' %}" class="btn w-100 p-4 text-center fs-3 btn-custom-color">Группы</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

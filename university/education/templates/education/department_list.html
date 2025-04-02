@@ -1,0 +1,48 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}Список кафедр{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4">Список кафедр</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Название факультета</th>
+                    <th>Кафедра</th>
+                    <th>Заведующий кафедрой</th>
+                    <th>Подробнее</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if department.faculty %}
+                                <a href="{% url 'faculty_detail' department.faculty.id %}" class="text-primary">
+                                    {{ department.faculty.name }}
+                                </a>
+                            {% else %}
+                                Нет факультета
+                            {% endif %}
+                        </td>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.head_teacher }}</td>
+                        <td>
+                            <a href="{% url 'department_detail' department.id %}" class="btn btn-info btn-sm">
+                                🔍 Открыть
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">Кафедры не найдены.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

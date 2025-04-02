@@ -1,0 +1,14 @@
+{% extends "layout/base_form.html" %}
+
+{% block title %}Редактирование факультета{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <h1>Редактировать факультет</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="menu-item">Сохранить</button>
+    </form>
+</div>
+{% endblock %}
