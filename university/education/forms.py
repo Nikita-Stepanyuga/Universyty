@@ -49,6 +49,29 @@ class TeacherForm(forms.ModelForm):
         model = Teacher
         fields = ['position', 'department','disciplines']
 
+    def save(self, commit=True):
+        first_name = self.cleaned_data['first_name'].strip()
+        last_name = self.cleaned_data['last_name'].strip()
+        patronymic = self.cleaned_data['patronymic'].strip()
+
+        person, created = Person.objects.get_or_create(
+            name=first_name,
+            surname=last_name,
+            patronic=patronymic
+        )
+
+        teacher = super().save(commit=False)
+        teacher.person = person
+        if commit:
+            teacher.save()
+
+            Teaches.objects.filter(teacher=teacher).delete()
+
+            for discipline in self.cleaned_data['disciplines']:
+                Teaches.objects.create(teacher=teacher, discipline=discipline)
+
+        return teacher
+
 class DisciplineForm(forms.ModelForm):
     class Meta:
         model = Discipline

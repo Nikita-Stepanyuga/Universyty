@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UniversityForm, StudentForm, TeacherForm, FacultyForm, DepartmentForm, GroupForm, DisciplineForm
-from .models import University, Teacher, Student, Faculty, Department, Group, Discipline, Person
+from .models import University, Teacher, Student, Faculty, Department, Group, Discipline, Person, Teaches
+from django.db import transaction
+
 
 def create_university(request):
     if request.method == "POST":
@@ -27,7 +29,7 @@ def add_student(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('university_main')
+            return redirect('add_student')
     else:
         form = StudentForm()
     return render(request, 'education/add_student.html', {'form': form})
@@ -37,26 +39,10 @@ def add_teacher(request):
     if request.method == 'POST':
         form = TeacherForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data['first_name'].strip()
-            last_name = form.cleaned_data['last_name'].strip()
-            patronymic = form.cleaned_data['patronymic'].strip()
-
-            person, created = Person.objects.get_or_create(
-                name=first_name,
-                surname=last_name,
-                patronic=patronymic
-            )
-
-            teacher = form.save(commit=False)
-            teacher.person = person
-            teacher.save()
-
-            form.save_m2m()
-
+            form.save()
             return redirect('university_main')
     else:
         form = TeacherForm()
-
     return render(request, 'education/add_teacher.html', {'form': form})
 
 

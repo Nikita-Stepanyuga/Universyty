@@ -53,6 +53,7 @@ class Teacher(models.Model):
     )
     position = models.CharField(max_length=20, choices=Position, default='Assistant')
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='teachers')
+    disciplines = models.ManyToManyField(Discipline, through='Teaches', through_fields=('teacher', 'discipline'))
 
     def __str__(self):
         return f"{self.person}"
