@@ -3,8 +3,10 @@
 {% block title %}Список групп{% endblock %}
 
 {% block content %}
-    <h1>Список групп</h1>
-    <table>
+    <h1 class="text-center mb-4">Список групп</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
         <thead>
             <tr>
                 <th>Группа</th>
@@ -33,4 +35,5 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
 {% endblock %}
