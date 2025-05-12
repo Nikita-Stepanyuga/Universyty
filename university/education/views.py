@@ -43,7 +43,15 @@ def add_teacher(request):
             return redirect('university_main')
     else:
         form = TeacherForm()
-    return render(request, 'education/add_teacher.html', {'form': form})
+
+    discipline_form = DisciplineForm()
+    departments = Department.objects.all()
+
+    return render(request, 'education/add_teacher.html', {
+        'form': form,
+        'discipline_form': discipline_form,
+        'departments':departments
+    })
 
 
 def add_faculty(request):

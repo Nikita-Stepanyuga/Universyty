@@ -32,6 +32,34 @@
                 <div class="mb-3">
                     <label for="id_disciplines" class="form-label">Выберите дисциплины:</label>
                     {{ form.disciplines }}
+
+                    <!-- Кнопка для показа формы добавления -->
+                    <button type="button" class="btn btn-outline-secondary btn-sm mt-2" data-bs-toggle="collapse" data-bs-target="#addDisciplineForm">
+                        + Добавить дисциплину
+                    </button>
+
+                    <!-- Форма добавления дисциплины -->
+                    <div class="collapse mt-3" id="addDisciplineForm">
+                        <div class="card card-body">
+                            <form id="inline-discipline-form">
+                                {% csrf_token %}
+                                <div class="mb-2">
+                                    <label class="form-label">Название дисциплины:</label>
+                                    {{ discipline_form.name }}
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label">Кафедра:</label>
+                                    <select class="form-select" name="department" id="id_new_department">
+                                        {% for dept in departments %}
+                                            <option value="{{ dept.id }}">{{ dept.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-sm">Сохранить дисциплину</button>
+                            </form>
+                            <div id="discipline-success" class="text-success mt-2" style="display:none;">Дисциплина добавлена!</div>
+                        </div>
+                    </div>
                 </div>
                 <!--
                 <div class="mb-3">
