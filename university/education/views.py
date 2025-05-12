@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UniversityForm, StudentForm, TeacherForm, FacultyForm, DepartmentForm, GroupForm, DisciplineForm
 from .models import University, Teacher, Student, Faculty, Department, Group, Discipline, Person, Teaches
 from django.db import transaction
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 
 def create_university(request):
@@ -182,3 +184,18 @@ def add_discipline(request):
         form = DisciplineForm()
 
     return render(request, 'education/add_discipline.html', {'form': form})
+
+
+def ajax_add_discipline(request):
+    name = request.POST.get('name')
+    department_id = request.POST.get('department')
+
+    if not name or not department_id:
+        return JsonResponse({'success': False}, status=400)
+
+    try:
+        department = Department.objects.get(pk=department_id)
+        discipline = Discipline.objects.create(name=name, department=department)
+        return JsonResponse({'success': True, 'id': discipline.id, 'name': discipline.name})
+    except Department.DoesNotExist:
+        return JsonResponse({'success': False}, status=404)

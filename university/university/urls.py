@@ -63,5 +63,8 @@ urlpatterns = [
         path('discipline/', views.add_discipline, name='add_discipline'),
     ])),
 
+    path('ajax/add_discipline/', views.ajax_add_discipline, name='ajax_add_discipline'),
+
+
     path('admin/', admin.site.urls),
 ]

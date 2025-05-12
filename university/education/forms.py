@@ -41,7 +41,10 @@ class TeacherForm(forms.ModelForm):
     patronymic = forms.CharField(label="Отчество", max_length=50, required=False)
     disciplines = forms.ModelMultipleChoiceField(
         queryset=Discipline.objects.all(),
-        widget=forms.SelectMultiple(attrs={'class': 'form-control selectpicker', 'data-live-search': 'true'}),
+        widget=forms.SelectMultiple(attrs={
+            'class': 'selectpicker',
+            'data-live-search': 'true'
+        }),
         required=False,
         label="Выберите дисциплины"
     )
